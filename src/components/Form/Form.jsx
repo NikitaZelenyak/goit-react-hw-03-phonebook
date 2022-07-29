@@ -5,6 +5,7 @@ import { Wrapper,Btn,Label,Input,Text, Message } from "./Form.styled";
 import * as yup from 'yup';
 import {AiOutlineUserAdd} from 'react-icons/ai'
 
+
 let schema = yup.object().shape({
     name: yup.string().required(),
     number: yup.number().required(),
@@ -36,4 +37,3 @@ export const AddContactForm = ({ onSubmitInfo }) => {
     }
 
 
-    

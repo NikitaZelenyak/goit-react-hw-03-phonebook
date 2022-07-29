@@ -3,8 +3,8 @@ import{TiUserDelete} from'react-icons/ti'
 import PropTypes from 'prop-types'; 
 
 export const Contacts = ({ contacts, onDelete, onFilter, }) => {
-    if (contacts) {
-     return (
+
+    return (
    
         <Wrapper>
           
@@ -17,10 +17,10 @@ export const Contacts = ({ contacts, onDelete, onFilter, }) => {
               <Input id="find" type="text"  onChange={onFilter} />
             <ul>
                 
-                {contacts.map(contact => (
-                    <Item key={contact.id}>
-                        <Text>{contact.name}: {contact.number}</Text>
-                        <Button type="button" onClick={()=>onDelete(contact.id)}><TiUserDelete color="#763f33" size={22}></TiUserDelete></Button>
+                {contacts.map(({id,name,number })=> (
+                    <Item key={id}>
+                        <Text>{name}: {number}</Text>
+                        <Button type="button" onClick={()=>onDelete(id)}><TiUserDelete color="#763f33" size={22}></TiUserDelete></Button>
                     </Item>
                    
                 ))}
@@ -28,15 +28,20 @@ export const Contacts = ({ contacts, onDelete, onFilter, }) => {
             </ul>
     </Wrapper>
 )
-}
-   
 
    
     }
 
 
 Contacts.prototype = {
-    contacts: PropTypes.arrayOf(PropTypes.object),
+    contacts: PropTypes.arrayOf(PropTypes.shape({
+        
+        id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number:PropTypes.string.isRequired
+    })),
     onDelete: PropTypes.func,
-    onFilter:PropTypes.func
+    onFilter: PropTypes.func,
+    
+  
 }

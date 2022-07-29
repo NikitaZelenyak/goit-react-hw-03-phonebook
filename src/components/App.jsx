@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid'
 import { AddContactForm } from "./Form/Form";
 import { Contacts } from "./Contacts/Contacts";
 
-
+import PropTypes from 'prop-types'; 
 
 
 export class App extends Component {
@@ -17,18 +17,19 @@ state={
  
       const getContacts =  localStorage.getItem(('contacts'))
 const contacts=JSON.parse(getContacts)
-
-    this.setState({
+if (contacts) {
+   this.setState({
       contacts,
     })
+}
+   
   }
   
   componentDidUpdate(_, prevState) {
    
     const { contacts } = this.state;
-    const { prevContact } = prevState;
-    
-    if (prevContact !== contacts) {
+
+    if (prevState.contacts !== contacts) {
 
 
       try {
@@ -45,9 +46,11 @@ const contacts=JSON.parse(getContacts)
     
     
   }
-  handlerAddContact = ({ name, number }) => {
+  handlerAddContact = ({name, number}) => {
     const uniqueId = nanoid();
     const { contacts } = this.state;
+
+
     const checkOnIncludes = contacts.some(contact => contact.name.toLowerCase() === name.toLowerCase( ));
    
     const newContact = {
@@ -88,12 +91,11 @@ const contacts=JSON.parse(getContacts)
   getVisibleContacts = () => {
     const { filter, contacts } = this.state;
 
-    if (contacts ) {
-         
+
       const normalizeFilter = filter.toLowerCase().trim();
     return contacts.filter(contact=>(contact.name.toLowerCase().includes(normalizeFilter)))
       
-    }
+
     
     
   }
@@ -111,3 +113,12 @@ const contacts=JSON.parse(getContacts)
 
 };
 
+AddContactForm.prototype = {
+  onSubmitInfo: PropTypes.func,
+
+}
+Contacts.prototype = {
+  contacts: PropTypes.func,
+  onDelete: PropTypes.func,
+  onFilter: PropTypes.func,
+}
