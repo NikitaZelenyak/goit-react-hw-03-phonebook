@@ -86,9 +86,15 @@ const contacts=JSON.parse(getContacts)
 }
 
   getVisibleContacts = () => {
-    const { filter,contacts } = this.state;
-    const normalizeFilter = filter.toLowerCase().trim();
+ const { filter,contacts } = this.state;
+    if (contacts) {
+         
+      const normalizeFilter = filter.toLowerCase().trim();
     return contacts.filter(contact=>(contact.name.toLowerCase().includes(normalizeFilter)))
+      
+    }
+    
+    
   }
   
   render() {
