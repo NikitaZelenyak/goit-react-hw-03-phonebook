@@ -10,8 +10,9 @@ export const Contacts = ({ contacts, onDelete, onFilter, }) => {
           
 
             <Title>Contacts</Title>
-            {contacts.length === 0 ? <Title>Add your first contact:)</Title> :   
-                <>
+
+          
+              
            <Label htmlFor='find'>Find contacts by name</Label>
               <Input id="find" type="text"  onChange={onFilter} />
             <ul>
@@ -23,7 +24,7 @@ export const Contacts = ({ contacts, onDelete, onFilter, }) => {
                    
                 ))}
 
-            </ul></> }
+            </ul>
     </Wrapper>
 )
 
