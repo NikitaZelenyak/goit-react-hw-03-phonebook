@@ -3,8 +3,8 @@ import{TiUserDelete} from'react-icons/ti'
 import PropTypes from 'prop-types'; 
 
 export const Contacts = ({ contacts, onDelete, onFilter, }) => {
-     
-    return (
+    if (contacts) {
+     return (
    
         <Wrapper>
           
@@ -16,6 +16,7 @@ export const Contacts = ({ contacts, onDelete, onFilter, }) => {
            <Label htmlFor='find'>Find contacts by name</Label>
               <Input id="find" type="text"  onChange={onFilter} />
             <ul>
+                
                 {contacts.map(contact => (
                     <Item key={contact.id}>
                         <Text>{contact.name}: {contact.number}</Text>
@@ -27,6 +28,8 @@ export const Contacts = ({ contacts, onDelete, onFilter, }) => {
             </ul>
     </Wrapper>
 )
+}
+   
 
    
     }
